@@ -17,8 +17,14 @@ function Books() {
 
   function loadBooks() {
     API.getBooks()
-      .then(res => 
+      .then(res => {
         setBooks(res.data)
+        setFormObject({
+          title: '',
+          author: '',
+          synopsis: ''
+        })
+      }
       )
       .catch(err => console.log(err));
   };
@@ -59,16 +65,19 @@ function Books() {
                 onChange={handleInputChange}
                 name="title"
                 placeholder="Title (required)"
+                value={formObject.title}
               />
               <Input
                 onChange={handleInputChange}
                 name="author"
                 placeholder="Author (required)"
+                value={formObject.author}
               />
               <TextArea
                 onChange={handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
+                value={formObject.synopsis}
               />
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
